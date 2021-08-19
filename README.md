@@ -20,6 +20,32 @@ pause
 
 
 
+```
+    def _read(self, byte):
+        try:
+            self._write(byte)
+            a = self.watchdog.read()    ## xiaolaba, corrected the code to be able to run
+```
+
+
+
+def get_info(self):
+add following to test the serial write and command protocol
+every time this python code runing, reset the usbwatchdog
+```
+        self._write(0x80)   ## init, usbwatchdog reply 0x81, 0x00, 0x02 (version 2) or 0x03 (version 3)
+        self._write(0xe3)
+        self._write(0x00)
+        
+        self._read(0x80)
+        self._read(0xe3)
+        self._read(0x00)
+                        
+        self._write(0xff)   ##reset
+
+```
+
+
 
 
 
