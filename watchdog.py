@@ -22,7 +22,8 @@ class UsbWatchDog(object):
     def _read(self, byte):
         try:
             self._write(byte)
-            a = self.read()
+            //a = self.read() ## wrong code
+            a = self.watchdog.read()    ## xiaolaba, corrected the code to be able to run with python3
             print(a)
         except Exception as e:
             raise Exception('Error while reading: {}'.format(e))
@@ -37,7 +38,9 @@ class UsbWatchDog(object):
     def get_info(self):
         ''' TODO: get current system info
         '''
-        with open('/proc/uptime', 'r') as f:
+        ## wrong code with python3
+        ##with open('/proc/uptime', 'r') as f:
+        with open('./proc/uptime', mode='r') as f:
             uptime = float(f.readline().split()[0])
             last_boot = str(timedelta(seconds = uptime))
 
@@ -47,6 +50,17 @@ class UsbWatchDog(object):
             'scheduled_restart': 0,
             'timeout':self.heartbeat
         }
+        
+        ### xiaolaba, test code for the control protocol
+        self._write(0x80)   ## init, usbwatchdog reply b\0x81, b\0x00, \b0x02 (version 2) or 0x03 (version 3)
+        self._write(0xe3)
+        self._write(0x00)
+        self._read(0x80)
+        self._read(0xe3)
+        self._read(0x00)
+        self._write(0xff)   ##reset or Restart Now
+        ### xiaolaba, test code for the control protocol       
+        
         return info
         
     def run(self):
