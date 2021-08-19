@@ -1,3 +1,34 @@
+
+## python code was broken and missing proc/uptime
+fix that and change some code to be able to work
+
+run win10 python3
+add run.bat
+```
+:: xiaolaba, 2021-08-19
+:: no clone, download zip from https://github.com/zatarra/usb-watchdog
+:: upzip, change folder name
+
+cd "c:\usb-watchdog-master\usb-watchdog"
+
+::hb = heart beat 2 *10 seconds
+python watchdog.py --hb 20 com4
+
+pause
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 # usb-watchdog
 [Original blogpost](http://www.davidgouveia.net/2018/02/how-to-create-your-own-script-for-a-usb-watchdog/)
 
