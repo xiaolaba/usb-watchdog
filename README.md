@@ -29,10 +29,13 @@ pause
 
 
 
-def get_info(self):
-add following to test the serial write and command protocol
-every time this python code runing, reset the usbwatchdog
+def get_info(self):  
+add following to test the serial write and read command protocol  
+every time this python code runing, reset the usbwatchdog  
+change code open ./proc/uptime
 ```
+        with open('./proc/uptime', mode='r') as f:
+
         self._write(0x80)   ## init, usbwatchdog reply 0x81, 0x00, 0x02 (version 2) or 0x03 (version 3)
         self._write(0xe3)
         self._write(0x00)
@@ -45,6 +48,14 @@ every time this python code runing, reset the usbwatchdog
 
 ```
 
+
+this is my test screen  
+![xiaolaba_python_code_running.JPG](xiaolaba_python_code_running.JPG)
+
+   
+   
+   
+   
 
 
 
