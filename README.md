@@ -1,5 +1,5 @@
 
-## python code was broken and missing proc/uptime
+## python code was broken and missing proc/uptime, my fix, then it is really open source code
 fix that and change some code to be able to work
 
 run win10 python3
